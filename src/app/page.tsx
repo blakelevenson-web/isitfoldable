@@ -1,65 +1,102 @@
-import Image from "next/image";
+import Link from "next/link";
+import { getRecentVisits, getElite8, getStats } from "@/lib/queries";
+import { SearchBar } from "@/components/SearchBar";
+import { firstPhoto } from "@/lib/photos";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function HomePage() {
+  const recent = await getRecentVisits(3);
+  const elite8 = await getElite8();
+  const stats = await getStats();
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div>
+      <div className="max-w-5xl mx-auto px-4 py-8">
+        {/* Stats Card */}
+        <div className="bg-gradient-to-r from-red-500 to-red-800 text-white rounded-2xl p-6 text-center shadow-lg mb-8">
+          <h2 className="text-2xl font-bold" style={{ color: '#FFD700' }}>
+            {stats.totalShops} Shops Rated &nbsp;|&nbsp; {stats.totalSlices} Slices Rated
+          </h2>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+
+        {/* Search */}
+        <SearchBar />
+
+        {/* Recent Slices */}
+        <section className="mb-10">
+          <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+            🍕 Recent Slices
+          </h2>
+          {recent.length === 0 ? (
+            <p className="text-warm-muted italic">
+              No reviews yet.{" "}
+              <Link href="/admin/visits/new">Add your first visit!</Link>
+            </p>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              {recent.map((v) => {
+                const photo = firstPhoto(v.photoUrl) || v.shopPhotoUrl;
+                return (
+                <Link
+                  key={v.id}
+                  href={`/visits/${v.id}`}
+                  className="block bg-white border border-warm-border rounded-xl overflow-hidden hover:border-accent transition-colors no-underline shadow-sm"
+                >
+                  {photo && (
+                    <img src={photo} alt={v.sliceType} className="w-full aspect-video object-cover" />
+                  )}
+                  <div className="p-4">
+                    <p className="font-bold text-gray-900">{v.shopName}</p>
+                    <p className="text-sm text-warm-muted">{v.sliceType} &middot; {v.date}</p>
+                    {v.comments && (
+                      <p className="text-sm text-warm-muted italic mt-2">&ldquo;{v.comments}&rdquo;</p>
+                    )}
+                    <div className="text-right mt-2">
+                      <span className="inline-block bg-accent-light text-accent font-bold px-3 py-1 rounded text-sm">
+                        {v.scoreOverall}.0
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+                );
+              })}
+            </div>
+          )}
+        </section>
+
+        {/* Elite 8 */}
+        <section className="mb-10">
+          <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+            🏆 The Elite 8
+          </h2>
+          {elite8.length === 0 ? (
+            <p className="text-warm-muted italic">Not enough data yet.</p>
+          ) : (
+            <div className="space-y-3">
+              {elite8.map((v, i) => {
+                const photo = firstPhoto(v.photoUrl) || v.shopPhotoUrl;
+                return (
+                <Link
+                  key={v.id}
+                  href={`/visits/${v.id}`}
+                  className="flex items-center gap-4 bg-white border border-warm-border rounded-xl p-4 hover:border-accent transition-colors no-underline shadow-sm"
+                >
+                  <span className="text-2xl font-black text-accent w-8 text-center">#{i + 1}</span>
+                  {photo && (
+                    <img src={photo} alt={v.sliceType} className="w-14 h-14 rounded-lg object-cover" />
+                  )}
+                  <div className="flex-1">
+                    <p className="font-bold text-gray-900">{v.shopName} ({v.sliceType})</p>
+                  </div>
+                  <span className="text-2xl font-black text-accent">{v.scoreOverall}.0</span>
+                </Link>
+                );
+              })}
+            </div>
+          )}
+        </section>
+      </div>
     </div>
   );
 }
