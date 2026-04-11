@@ -21,7 +21,6 @@ export default function RootLayout({
               🍕 <span style={{ color: '#FFD700' }}>Foldable</span>
             </Link>
             <div className="flex gap-6 text-sm font-semibold">
-              <Link href="/" style={{ color: '#FFD700' }} className="hover:text-yellow-100 no-underline">Home</Link>
               <Link href="/shops" style={{ color: '#FFD700' }} className="hover:text-yellow-100 no-underline">Shops</Link>
               <Link href="/about" style={{ color: '#FFD700' }} className="hover:text-yellow-100 no-underline">About</Link>
               <Link href="/admin/login" style={{ color: '#FFD700' }} className="hover:text-yellow-100 no-underline">Admin</Link>
