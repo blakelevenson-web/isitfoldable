@@ -29,10 +29,7 @@ export default async function HomePage() {
             🍕 Recent Slices
           </h2>
           {recent.length === 0 ? (
-            <p className="text-warm-muted italic">
-              No reviews yet.{" "}
-              <Link href="/admin/visits/new">Add your first visit!</Link>
-            </p>
+            <p className="text-warm-muted italic">No reviews yet.</p>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               {recent.map((v) => {

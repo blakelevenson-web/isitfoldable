@@ -105,7 +105,7 @@ export default function ShopsPage() {
           <p className="text-5xl mb-4">🏪</p>
           <p className="text-warm-muted">
             {shops.length === 0 ? (
-              <>No shops yet. <Link href="/admin">Add your first shop!</Link></>
+              "No shops yet."
             ) : (
               "No shops match your filters."
             )}
