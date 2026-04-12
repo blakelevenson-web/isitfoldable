@@ -27,7 +27,24 @@ export default function RootLayout({
             </div>
           </nav>
         </header>
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 pb-24">{children}</main>
+
+        {/* Bottom Navigation Bar */}
+        <nav className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 bg-white/90 backdrop-blur-md border border-warm-border rounded-full shadow-lg px-8 py-3 flex items-center gap-8">
+          <Link href="/" className="flex flex-col items-center gap-1 no-underline text-warm-muted hover:text-accent transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span className="text-xs font-medium">Home</span>
+          </Link>
+          <Link href="/shops" className="flex flex-col items-center gap-1 no-underline text-warm-muted hover:text-accent transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3h18v4H3z"/><path d="M3 7v13a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V7"/><path d="M8 7v4a4 4 0 0 0 8 0V7"/></svg>
+            <span className="text-xs font-medium">Shops</span>
+          </Link>
+          <Link href="/about" className="flex flex-col items-center gap-1 no-underline text-warm-muted hover:text-accent transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <span className="text-xs font-medium">About</span>
+          </Link>
+        </nav>
+
         <footer className="border-t border-warm-border text-center py-6 text-sm text-warm-muted">
           Foldable — Pizza Rating App
         </footer>

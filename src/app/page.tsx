@@ -13,15 +13,15 @@ export default async function HomePage() {
   return (
     <div>
       <div className="max-w-5xl mx-auto px-4 py-8">
-        {/* Search Bar */}
-        <SearchBar />
-
         {/* Stats Card */}
         <div className="bg-gradient-to-r from-red-500 to-red-800 text-white rounded-2xl p-6 text-center shadow-lg mb-8">
           <h2 className="text-2xl font-bold" style={{ color: '#FFD700' }}>
             {stats.totalShops} Shops Rated &nbsp;|&nbsp; {stats.totalSlices} Slices Rated
           </h2>
         </div>
+
+        {/* Search Bar */}
+        <SearchBar />
 
         {/* Recent Slices */}
         <section className="mb-10">
