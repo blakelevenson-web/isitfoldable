@@ -265,7 +265,7 @@ export default function AdminPage() {
               >
                 📸 {visitPhotoPreviews.length > 0 ? "Add Another Photo" : "Take Photo"}
               </button>
-              <input ref={visitFileRef} type="file" accept="image/*" capture="environment" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) handlePhotoUpload(f, "visit"); e.target.value = ""; }} />
+              <input ref={visitFileRef} type="file" accept="image/*"className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) handlePhotoUpload(f, "visit"); e.target.value = ""; }} />
               {uploading && <p className="text-xs text-warm-muted mt-1">Uploading...</p>}
             </div>
 
@@ -366,7 +366,7 @@ export default function AdminPage() {
               >
                 📸 {shopPhotoPreview ? "Retake Photo" : "Take Photo"}
               </button>
-              <input ref={shopFileRef} type="file" accept="image/*" capture="environment" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) handlePhotoUpload(f, "shop"); }} />
+              <input ref={shopFileRef} type="file" accept="image/*"className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) handlePhotoUpload(f, "shop"); }} />
               {uploading && <p className="text-xs text-warm-muted mt-1">Uploading...</p>}
             </div>
             <button type="submit" className="w-full bg-accent text-white rounded-lg py-3 font-bold hover:bg-accent-dark">
