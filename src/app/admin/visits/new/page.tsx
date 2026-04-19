@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { PhotoCapture } from "@/components/PhotoCapture";
 
 type Shop = { id: string; name: string; address: string };
 
@@ -12,6 +13,7 @@ export default function AddVisitPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [shopSearch, setShopSearch] = useState("");
+  const [photoUrl, setPhotoUrl] = useState("");
 
   useEffect(() => {
     fetch("/api/shops")
@@ -41,7 +43,7 @@ export default function AddVisitPage() {
       scoreCheese: Number(form.get("scoreCheese")),
       scoreFoldability: Number(form.get("scoreFoldability")),
       comments: (form.get("comments") as string) || undefined,
-      photoUrl: (form.get("photoUrl") as string) || undefined,
+      photoUrl: photoUrl || undefined,
     };
 
     if (!data.shopId) {
@@ -163,14 +165,7 @@ export default function AddVisitPage() {
           />
         </div>
 
-        <div>
-          <label className="block text-sm font-medium mb-1">Photo URL (optional)</label>
-          <input
-            name="photoUrl"
-            className="w-full border border-warm-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent"
-            placeholder="https://..."
-          />
-        </div>
+        <PhotoCapture onPhotoUrl={setPhotoUrl} currentUrl={photoUrl} />
 
         <button
           type="submit"

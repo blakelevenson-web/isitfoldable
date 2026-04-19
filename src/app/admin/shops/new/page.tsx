@@ -3,11 +3,13 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { PhotoCapture } from "@/components/PhotoCapture";
 
 export default function AddShopPage() {
   const router = useRouter();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [photoUrl, setPhotoUrl] = useState("");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -19,7 +21,7 @@ export default function AddShopPage() {
       name: form.get("name") as string,
       address: form.get("address") as string,
       zipCode: form.get("zipCode") as string,
-      photoUrl: (form.get("photoUrl") as string) || undefined,
+      photoUrl: photoUrl || undefined,
     };
 
     const res = await fetch("/api/shops", {
@@ -83,14 +85,7 @@ export default function AddShopPage() {
           />
         </div>
 
-        <div>
-          <label className="block text-sm font-medium mb-1">Photo URL (optional)</label>
-          <input
-            name="photoUrl"
-            className="w-full border border-warm-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent"
-            placeholder="https://..."
-          />
-        </div>
+        <PhotoCapture onPhotoUrl={setPhotoUrl} currentUrl={photoUrl} />
 
         <button
           type="submit"
