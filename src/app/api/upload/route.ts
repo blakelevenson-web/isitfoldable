@@ -13,10 +13,15 @@ export async function POST(req: NextRequest) {
 
   // Use Vercel Blob in production, local filesystem in dev
   if (process.env.BLOB_READ_WRITE_TOKEN) {
-    const blob = await put(file.name, file, {
-      access: "public",
-    });
-    return NextResponse.json({ url: blob.url });
+    try {
+      const blob = await put(file.name, file, {
+        access: "public",
+      });
+      return NextResponse.json({ url: blob.url });
+    } catch (err) {
+      console.error("Blob upload failed:", err);
+      return NextResponse.json({ error: "Photo upload failed" }, { status: 500 });
+    }
   }
 
   // Local fallback for development
