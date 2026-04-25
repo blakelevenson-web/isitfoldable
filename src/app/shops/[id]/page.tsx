@@ -25,7 +25,15 @@ export default async function ShopDetailPage({ params }: { params: Promise<{ id:
         <img src={shop.photoUrl} alt={shop.name} className="w-full h-56 object-cover rounded-xl mb-6" />
       )}
 
-      <h1 className="text-3xl font-bold mb-1">{shop.name}</h1>
+      <div className="flex items-center justify-between mb-1">
+        <h1 className="text-3xl font-bold">{shop.name}</h1>
+        <Link
+          href={`/admin/shops/${id}/edit`}
+          className="text-xs px-3 py-1 bg-accent text-white rounded-lg font-medium no-underline hover:bg-accent-dark"
+        >
+          Edit
+        </Link>
+      </div>
       <p className="text-warm-muted mb-4">📍 {shop.address}</p>
 
       {avg && (
