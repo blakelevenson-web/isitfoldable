@@ -74,7 +74,7 @@ export default async function ShopDetailPage({ params }: { params: Promise<{ id:
                   )}
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="text-xl font-black text-accent">{v.scoreOverall}.0</span>
+                  <span className="text-xl font-black text-accent">{Number(v.scoreOverall).toFixed(1)}</span>
                   <Link
                     href={`/visits/${v.id}`}
                     className="text-sm px-3 py-1 bg-accent text-white rounded-lg font-medium no-underline hover:bg-accent-dark"

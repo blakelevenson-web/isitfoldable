@@ -51,7 +51,7 @@ export default async function HomePage() {
                     )}
                     <div className="text-right mt-2">
                       <span className="inline-block bg-accent-light text-accent font-bold px-3 py-1 rounded text-sm">
-                        {v.scoreOverall}.0
+                        {Number(v.scoreOverall).toFixed(1)}
                       </span>
                     </div>
                   </div>
@@ -86,7 +86,7 @@ export default async function HomePage() {
                   <div className="flex-1">
                     <p className="font-bold text-gray-900">{v.shopName} ({v.sliceType})</p>
                   </div>
-                  <span className="text-2xl font-black text-accent">{v.scoreOverall}.0</span>
+                  <span className="text-2xl font-black text-accent">{Number(v.scoreOverall).toFixed(1)}</span>
                 </Link>
                 );
               })}

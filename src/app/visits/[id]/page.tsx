@@ -50,7 +50,7 @@ export default async function VisitDetailPage({ params }: { params: Promise<{ id
               <div key={s.label}>
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-sm font-medium">{s.label}</span>
-                  <span className="text-sm text-warm-muted">{s.value}.0/5.0</span>
+                  <span className="text-sm text-warm-muted">{Number(s.value).toFixed(1)}/5.0</span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-3">
                   <div
@@ -67,7 +67,7 @@ export default async function VisitDetailPage({ params }: { params: Promise<{ id
         <div>
           <div className="bg-accent-light border border-accent/20 rounded-xl p-6 text-center mb-6">
             <p className="text-sm text-warm-muted mb-1">Overall Score</p>
-            <p className="text-5xl font-black text-accent">{visit.scoreOverall}.0</p>
+            <p className="text-5xl font-black text-accent">{Number(visit.scoreOverall).toFixed(1)}</p>
           </div>
 
           <h2 className="text-lg font-bold mb-2">Reviewer&apos;s Notes</h2>

@@ -37,7 +37,6 @@ export default function AddVisitPage() {
       shopId: form.get("shopId") as string,
       date: form.get("date") as string,
       sliceType: form.get("sliceType") as string,
-      scoreOverall: Number(form.get("scoreOverall")),
       scoreDough: Number(form.get("scoreDough")),
       scoreSauce: Number(form.get("scoreSauce")),
       scoreCheese: Number(form.get("scoreCheese")),
@@ -72,17 +71,16 @@ export default function AddVisitPage() {
   const scoreField = (name: string, label: string) => (
     <div>
       <label className="block text-sm font-medium mb-1">{label} *</label>
-      <select
+      <input
         name={name}
+        type="number"
         required
-        defaultValue=""
+        min="1"
+        max="5"
+        step="0.1"
+        placeholder="1.0 - 5.0"
         className="w-full border border-warm-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent"
-      >
-        <option value="" disabled>Score</option>
-        {[1, 2, 3, 4, 5].map((n) => (
-          <option key={n} value={n}>{n}</option>
-        ))}
-      </select>
+      />
     </div>
   );
 
@@ -147,8 +145,8 @@ export default function AddVisitPage() {
         </div>
 
         {/* Scores */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-          {scoreField("scoreOverall", "Overall")}
+        <p className="text-xs text-warm-muted">Overall is auto-calculated from Dough + Sauce + Cheese average.</p>
+        <div className="grid grid-cols-2 gap-3">
           {scoreField("scoreDough", "Dough/Crust")}
           {scoreField("scoreSauce", "Sauce")}
           {scoreField("scoreCheese", "Cheese")}
