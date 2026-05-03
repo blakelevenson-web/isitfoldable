@@ -269,15 +269,20 @@ export default function AdminPage() {
               {uploading && <p className="text-xs text-warm-muted mt-1">Uploading...</p>}
             </div>
 
-            <p className="font-bold text-sm">Ratings (1-5)</p>
+            <p className="font-bold text-sm">Ratings (0-5)</p>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {["scoreOverall", "scoreDough", "scoreSauce", "scoreCheese", "scoreFoldability"].map((key) => (
                 <div key={key}>
                   <label className="block text-xs font-medium mb-1 capitalize">{key.replace("score", "")}</label>
-                  <select name={key} required defaultValue={editingVisit ? (editingVisit as any)[key] : ""} className={inputClass}>
-                    <option value="" disabled>Score</option>
-                    {[1, 2, 3, 4, 5].map((n) => <option key={n} value={n}>{n}</option>)}
-                  </select>
+                  <input
+                    name={key}
+                    type="text"
+                    inputMode="decimal"
+                    required
+                    defaultValue={editingVisit ? (editingVisit as any)[key] : ""}
+                    placeholder="e.g. 3.5"
+                    className={inputClass}
+                  />
                 </div>
               ))}
             </div>
