@@ -74,12 +74,11 @@ export default function AddVisitPage() {
       <label className="block text-sm font-medium mb-1">{label} *</label>
       <input
         name={name}
-        type="number"
+        type="text"
+        inputMode="decimal"
         required
-        min="0"
-        max="5"
-        step="0.1"
-        placeholder="0.0 - 5.0"
+        pattern="[0-5](\.\d{1,2})?"
+        placeholder="e.g. 3.5"
         className="w-full border border-warm-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent"
       />
     </div>
