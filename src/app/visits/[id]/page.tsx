@@ -52,11 +52,13 @@ export default async function VisitDetailPage({ params }: { params: Promise<{ id
                   <span className="text-sm font-medium">{s.label}</span>
                   <span className="text-sm text-warm-muted">{Number(s.value).toFixed(1)}/10.0</span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-3">
+                <div className="w-full bg-gray-200 rounded-full h-5 relative">
                   <div
-                    className="bg-accent h-3 rounded-full transition-all"
+                    className="bg-accent h-5 rounded-full transition-all flex items-center justify-end"
                     style={{ width: `${(s.value / 10) * 100}%` }}
-                  />
+                  >
+                    <span className="text-xs leading-none -mr-2">🍕</span>
+                  </div>
                 </div>
               </div>
             ))}
