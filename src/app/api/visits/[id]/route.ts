@@ -11,8 +11,13 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
 export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const body = await req.json();
-  const visit = await updateVisit(id, body);
-  return NextResponse.json(visit);
+  try {
+    const visit = await updateVisit(id, body);
+    return NextResponse.json(visit);
+  } catch (err: any) {
+    console.error("Update visit failed:", err);
+    return NextResponse.json({ error: err?.message || "Update failed" }, { status: 500 });
+  }
 }
 
 export async function DELETE(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
