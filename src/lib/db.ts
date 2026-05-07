@@ -26,24 +26,24 @@ export async function initDb() {
       shop_id TEXT NOT NULL REFERENCES shops(id),
       date TEXT NOT NULL,
       slice_type TEXT NOT NULL,
-      score_overall REAL NOT NULL CHECK(score_overall BETWEEN 0 AND 10),
-      score_dough REAL NOT NULL CHECK(score_dough BETWEEN 0 AND 10),
-      score_sauce REAL NOT NULL CHECK(score_sauce BETWEEN 0 AND 10),
-      score_cheese REAL NOT NULL CHECK(score_cheese BETWEEN 0 AND 10),
-      score_foldability REAL NOT NULL CHECK(score_foldability BETWEEN 0 AND 10),
+      score_overall REAL NOT NULL,
+      score_dough REAL NOT NULL,
+      score_sauce REAL NOT NULL,
+      score_cheese REAL NOT NULL,
+      score_foldability REAL NOT NULL,
       comments TEXT,
       photo_url TEXT,
       created_at TEXT DEFAULT (datetime('now'))
     );
   `);
 
-  // Migrate: recreate visits table if CHECK constraints are still 0-5
+  // Migrate: drop CHECK constraints from visits table if they exist
   try {
     const tableInfo = await client.execute(
       `SELECT sql FROM sqlite_master WHERE type='table' AND name='visits'`
     );
     const createSql = tableInfo.rows[0]?.sql as string | undefined;
-    if (createSql && createSql.includes("BETWEEN 0 AND 5")) {
+    if (createSql && createSql.includes("CHECK")) {
       await client.executeMultiple(`
         ALTER TABLE visits RENAME TO visits_old;
 
@@ -52,11 +52,11 @@ export async function initDb() {
           shop_id TEXT NOT NULL REFERENCES shops(id),
           date TEXT NOT NULL,
           slice_type TEXT NOT NULL,
-          score_overall REAL NOT NULL CHECK(score_overall BETWEEN 0 AND 10),
-          score_dough REAL NOT NULL CHECK(score_dough BETWEEN 0 AND 10),
-          score_sauce REAL NOT NULL CHECK(score_sauce BETWEEN 0 AND 10),
-          score_cheese REAL NOT NULL CHECK(score_cheese BETWEEN 0 AND 10),
-          score_foldability REAL NOT NULL CHECK(score_foldability BETWEEN 0 AND 10),
+          score_overall REAL NOT NULL,
+          score_dough REAL NOT NULL,
+          score_sauce REAL NOT NULL,
+          score_cheese REAL NOT NULL,
+          score_foldability REAL NOT NULL,
           comments TEXT,
           photo_url TEXT,
           created_at TEXT DEFAULT (datetime('now'))
@@ -66,9 +66,9 @@ export async function initDb() {
 
         DROP TABLE visits_old;
       `);
-      console.log("Migrated visits table: CHECK constraints updated to 0-10");
+      console.log("Migrated visits table: removed CHECK constraints");
     }
   } catch (err) {
-    console.error("Migration check failed:", err);
+    console.error("Migration failed:", err);
   }
 }
