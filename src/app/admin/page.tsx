@@ -125,17 +125,26 @@ export default function AdminPage() {
     const url = editingVisit ? `/api/visits/${editingVisit.id}` : "/api/visits";
     const method = editingVisit ? "PUT" : "POST";
 
-    const res = await fetch(url, { method, headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
-    if (res.ok) {
-      setSuccess(editingVisit ? "Updated!" : "Added!");
-      setEditingVisit(null);
-      setVisitPhotos([]);
-      setVisitPhotoPreviews([]);
-      loadData();
-      (e.target as HTMLFormElement).reset();
-    } else {
-      const d = await res.json();
-      setError(d.error || "Error");
+    try {
+      const res = await fetch(url, { method, headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
+      if (res.ok) {
+        setSuccess(editingVisit ? "Updated!" : "Added!");
+        setEditingVisit(null);
+        setVisitPhotos([]);
+        setVisitPhotoPreviews([]);
+        loadData();
+        (e.target as HTMLFormElement).reset();
+      } else {
+        const text = await res.text();
+        try {
+          const d = JSON.parse(text);
+          setError(d.error || `Error ${res.status}: ${text}`);
+        } catch {
+          setError(`Error ${res.status}: ${text}`);
+        }
+      }
+    } catch (err: any) {
+      setError(`Network error: ${err?.message || "Failed to connect"}`);
     }
   }
 

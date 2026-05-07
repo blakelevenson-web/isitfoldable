@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
   }
 
   for (const [name, val] of Object.entries({ scoreOverall, scoreDough, scoreSauce, scoreCheese, scoreFoldability })) {
-    if (typeof val !== "number" || val < 0 || val > 10) {
+    if (typeof val !== "number" || isNaN(val) || val < 0 || val > 10) {
       return NextResponse.json({ error: `${name} must be a number between 0 and 10.` }, { status: 400 });
     }
   }
