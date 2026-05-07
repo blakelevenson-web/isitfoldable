@@ -77,8 +77,8 @@ export default function AddVisitPage() {
         type="text"
         inputMode="decimal"
         required
-        pattern="[0-5](\.\d{1,2})?"
-        placeholder="e.g. 3.5"
+        pattern="(10|[0-9])(\.\d{1,2})?"
+        placeholder="e.g. 7.5"
         className="w-full border border-warm-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent"
       />
     </div>

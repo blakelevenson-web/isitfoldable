@@ -269,7 +269,7 @@ export default function AdminPage() {
               {uploading && <p className="text-xs text-warm-muted mt-1">Uploading...</p>}
             </div>
 
-            <p className="font-bold text-sm">Ratings (0-5)</p>
+            <p className="font-bold text-sm">Ratings (0-10)</p>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {["scoreOverall", "scoreDough", "scoreSauce", "scoreCheese", "scoreFoldability"].map((key) => (
                 <div key={key}>
@@ -280,7 +280,7 @@ export default function AdminPage() {
                     inputMode="decimal"
                     required
                     defaultValue={editingVisit ? (editingVisit as any)[key] : ""}
-                    placeholder="e.g. 3.5"
+                    placeholder="e.g. 7.5"
                     className={inputClass}
                   />
                 </div>
