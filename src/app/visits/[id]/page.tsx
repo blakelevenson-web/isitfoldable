@@ -50,12 +50,12 @@ export default async function VisitDetailPage({ params }: { params: Promise<{ id
               <div key={s.label}>
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-sm font-medium">{s.label}</span>
-                  <span className="text-sm text-warm-muted">{Number(s.value).toFixed(1)}/5.0</span>
+                  <span className="text-sm text-warm-muted">{Number(s.value).toFixed(1)}/10.0</span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-3">
                   <div
                     className="bg-accent h-3 rounded-full transition-all"
-                    style={{ width: `${(s.value / 5) * 100}%` }}
+                    style={{ width: `${(s.value / 10) * 100}%` }}
                   />
                 </div>
               </div>
