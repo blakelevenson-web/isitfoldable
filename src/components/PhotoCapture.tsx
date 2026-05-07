@@ -56,7 +56,7 @@ export function PhotoCapture({ onPhotoUrl, currentUrl }: Props) {
 
       {preview && (
         <div className="mb-3 relative">
-          <img src={preview} alt="Preview" className="w-full h-48 object-cover rounded-xl border border-warm-border" />
+          <img src={preview} alt="Preview" className="w-full max-h-64 object-contain bg-gray-50 rounded-xl border border-warm-border" />
           <button
             type="button"
             onClick={() => { setPreview(null); onPhotoUrl(""); setError(""); }}

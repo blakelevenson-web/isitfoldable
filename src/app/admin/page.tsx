@@ -252,7 +252,7 @@ export default function AdminPage() {
                 <div className="grid grid-cols-3 gap-2 mb-2">
                   {visitPhotoPreviews.map((preview, i) => (
                     <div key={i} className="relative">
-                      <img src={preview} alt={`Photo ${i + 1}`} className="w-full h-28 object-cover rounded-lg border border-warm-border" />
+                      <img src={preview} alt={`Photo ${i + 1}`} className="w-full h-28 object-contain bg-gray-50 rounded-lg border border-warm-border" />
                       <button type="button" onClick={() => removeVisitPhoto(i)} className="absolute top-1 right-1 bg-white/90 text-red-600 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold shadow">×</button>
                     </div>
                   ))}
@@ -360,7 +360,7 @@ export default function AdminPage() {
               <label className="block text-sm font-medium mb-1">Shop Photo</label>
               {shopPhotoPreview && (
                 <div className="relative mb-2">
-                  <img src={shopPhotoPreview} alt="Preview" className="w-full h-48 object-cover rounded-xl border border-warm-border" />
+                  <img src={shopPhotoPreview} alt="Preview" className="w-full h-48 object-contain bg-gray-50 rounded-xl border border-warm-border" />
                   <button type="button" onClick={() => { setShopPhoto(""); setShopPhotoPreview(""); }} className="absolute top-2 right-2 bg-white/90 text-red-600 rounded-full w-7 h-7 flex items-center justify-center text-sm font-bold shadow">×</button>
                 </div>
               )}

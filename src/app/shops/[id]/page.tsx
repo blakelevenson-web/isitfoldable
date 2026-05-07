@@ -22,7 +22,7 @@ export default async function ShopDetailPage({ params }: { params: Promise<{ id:
       </Link>
 
       {shop.photoUrl && (
-        <img src={shop.photoUrl} alt={shop.name} className="w-full h-56 object-cover rounded-xl mb-6" />
+        <img src={shop.photoUrl} alt={shop.name} className="w-full max-h-96 object-contain bg-gray-50 rounded-xl mb-6" />
       )}
 
       <div className="flex items-center justify-between mb-1">

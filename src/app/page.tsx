@@ -41,7 +41,7 @@ export default async function HomePage() {
                   className="block bg-white border border-warm-border rounded-xl overflow-hidden hover:border-accent transition-colors no-underline shadow-sm"
                 >
                   {photo && (
-                    <img src={photo} alt={v.sliceType} className="w-full aspect-video object-cover" />
+                    <img src={photo} alt={v.sliceType} className="w-full max-h-80 object-contain bg-gray-50" />
                   )}
                   <div className="p-4">
                     <p className="font-bold text-gray-900">{v.shopName}</p>

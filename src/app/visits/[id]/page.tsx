@@ -27,12 +27,12 @@ export default async function VisitDetailPage({ params }: { params: Promise<{ id
         const photos = parsePhotos(visit.photoUrl);
         if (photos.length === 0) return null;
         if (photos.length === 1) return (
-          <img src={photos[0]} alt={visit.sliceType} className="w-full aspect-video object-cover rounded-xl mb-6" />
+          <img src={photos[0]} alt={visit.sliceType} className="w-full max-h-96 object-contain bg-gray-50 rounded-xl mb-6" />
         );
         return (
           <div className="grid grid-cols-2 gap-2 mb-6">
             {photos.map((url, i) => (
-              <img key={i} src={url} alt={`${visit.sliceType} photo ${i + 1}`} className="w-full aspect-video object-cover rounded-xl" />
+              <img key={i} src={url} alt={`${visit.sliceType} photo ${i + 1}`} className="w-full max-h-80 object-contain bg-gray-50 rounded-xl" />
             ))}
           </div>
         );

@@ -17,7 +17,7 @@ export function VisitCard({ id, shopName, scoreOverall, date, sliceType, photoUr
       className="block bg-white border border-warm-border rounded-xl p-4 hover:shadow-md transition-shadow no-underline"
     >
       {photoUrl && (
-        <img src={photoUrl} alt={sliceType} className="w-full aspect-video object-cover rounded-lg mb-3" />
+        <img src={photoUrl} alt={sliceType} className="w-full max-h-64 object-contain bg-gray-50 rounded-lg mb-3" />
       )}
       <div className="flex items-start justify-between gap-2">
         <div>

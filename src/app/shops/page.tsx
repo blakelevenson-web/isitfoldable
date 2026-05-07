@@ -120,7 +120,7 @@ export default function ShopsPage() {
               className="block bg-white border border-warm-border rounded-xl overflow-hidden hover:border-accent transition-colors no-underline shadow-sm"
             >
               {shop.photoUrl && (
-                <img src={shop.photoUrl} alt={shop.name} className="w-full aspect-video object-cover" />
+                <img src={shop.photoUrl} alt={shop.name} className="w-full max-h-64 object-contain bg-gray-50" />
               )}
               <div className="p-4">
                 <h3 className="font-bold text-gray-900">{shop.name}</h3>
