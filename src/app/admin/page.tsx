@@ -223,7 +223,7 @@ export default function AdminPage() {
             </div>
           )}
 
-          <form onSubmit={handleSubmitVisit} className="space-y-4 mb-8">
+          <form key={editingVisit?.id || "new"} onSubmit={handleSubmitVisit} className="space-y-4 mb-8">
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium mb-1">Shop *</label>
