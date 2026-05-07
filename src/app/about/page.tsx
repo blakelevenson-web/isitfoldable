@@ -20,7 +20,7 @@ export default function AboutPage() {
         </p>
       </div>
 
-      <h2 className="text-xl font-bold mb-4">The Rating System (1.0 - 5.0)</h2>
+      <h2 className="text-xl font-bold mb-4">The Rating System (0.0 - 10.0)</h2>
 
       <div className="space-y-3">
         {ratings.map((r) => (
