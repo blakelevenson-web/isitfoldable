@@ -57,7 +57,7 @@ export default async function VisitDetailPage({ params }: { params: Promise<{ id
                     className="bg-accent h-5 rounded-full transition-all flex items-center justify-end"
                     style={{ width: `${(s.value / 10) * 100}%` }}
                   >
-                    <span className="text-xs leading-none -mr-2">🍕</span>
+                    <span className="text-sm leading-none -mr-3 w-6 h-6 flex items-center justify-center rounded-full bg-white border-2 border-yellow-400 shadow-sm">🍕</span>
                   </div>
                 </div>
               </div>
