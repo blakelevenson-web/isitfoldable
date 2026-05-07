@@ -144,6 +144,7 @@ export async function createShop(data: {
   zipCode: string;
   photoUrl?: string;
 }) {
+  await ensureSeeded();
   return db.insert(shops).values(data).returning().get();
 }
 
@@ -153,10 +154,12 @@ export async function updateShop(id: string, data: {
   zipCode?: string;
   photoUrl?: string;
 }) {
+  await ensureSeeded();
   return db.update(shops).set(data).where(eq(shops.id, id)).returning().get();
 }
 
 export async function deleteShop(id: string) {
+  await ensureSeeded();
   await db.delete(visits).where(eq(visits.shopId, id)).run();
   return db.delete(shops).where(eq(shops.id, id)).run();
 }
@@ -173,6 +176,7 @@ export async function createVisit(data: {
   comments?: string;
   photoUrl?: string;
 }) {
+  await ensureSeeded();
   return db.insert(visits).values(data).returning().get();
 }
 
@@ -188,10 +192,12 @@ export async function updateVisit(id: string, data: {
   comments?: string;
   photoUrl?: string;
 }) {
+  await ensureSeeded();
   return db.update(visits).set(data).where(eq(visits.id, id)).returning().get();
 }
 
 export async function deleteVisit(id: string) {
+  await ensureSeeded();
   return db.delete(visits).where(eq(visits.id, id)).run();
 }
 
