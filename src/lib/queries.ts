@@ -96,6 +96,30 @@ export async function getElite8() {
     .all();
 }
 
+export async function getAllVisits(sort: "recent" | "best" = "recent") {
+  await ensureSeeded();
+  const order =
+    sort === "best"
+      ? [desc(visits.scoreOverall), desc(visits.date)]
+      : [desc(visits.date), desc(visits.createdAt)];
+  return db
+    .select({
+      id: visits.id,
+      date: visits.date,
+      sliceType: visits.sliceType,
+      scoreOverall: visits.scoreOverall,
+      photoUrl: visits.photoUrl,
+      comments: visits.comments,
+      shopName: shops.name,
+      shopId: visits.shopId,
+      shopPhotoUrl: shops.photoUrl,
+    })
+    .from(visits)
+    .innerJoin(shops, eq(visits.shopId, shops.id))
+    .orderBy(...order)
+    .all();
+}
+
 export async function getStats() {
   await ensureSeeded();
   const totalShops = await db

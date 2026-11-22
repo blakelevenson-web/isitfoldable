@@ -21,6 +21,7 @@ export default function RootLayout({
               🍕 <span style={{ color: '#FFD700' }}>Foldable</span>
             </Link>
             <div className="flex gap-6 text-sm font-semibold">
+              <Link href="/slices" style={{ color: '#FFD700' }} className="hover:text-yellow-100 no-underline">Slices</Link>
               <Link href="/shops" style={{ color: '#FFD700' }} className="hover:text-yellow-100 no-underline">Shops</Link>
               <Link href="/about" style={{ color: '#FFD700' }} className="hover:text-yellow-100 no-underline">About</Link>
               <Link href="/admin/login" style={{ color: '#FFD700' }} className="hover:text-yellow-100 no-underline">Admin</Link>
@@ -30,10 +31,14 @@ export default function RootLayout({
         <main className="flex-1 pb-24">{children}</main>
 
         {/* Bottom Navigation Bar */}
-        <nav className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 bg-white/90 backdrop-blur-md border border-warm-border rounded-full shadow-lg px-8 py-3 flex items-center gap-8">
+        <nav className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 bg-white/90 backdrop-blur-md border border-warm-border rounded-full shadow-lg px-6 py-3 flex items-center gap-6">
           <Link href="/" className="flex flex-col items-center gap-1 no-underline text-warm-muted hover:text-accent transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
             <span className="text-xs font-medium">Home</span>
+          </Link>
+          <Link href="/slices" className="flex flex-col items-center gap-1 no-underline text-warm-muted hover:text-accent transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2 2 20h20z"/><circle cx="10" cy="14" r="1"/><circle cx="14" cy="16" r="1"/><circle cx="12" cy="10" r="1"/></svg>
+            <span className="text-xs font-medium">Slices</span>
           </Link>
           <Link href="/shops" className="flex flex-col items-center gap-1 no-underline text-warm-muted hover:text-accent transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3h18v4H3z"/><path d="M3 7v13a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V7"/><path d="M8 7v4a4 4 0 0 0 8 0V7"/></svg>
