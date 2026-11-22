@@ -15,8 +15,10 @@ export default async function HomePage() {
       <div className="max-w-5xl mx-auto px-4 py-8">
         {/* Stats Card */}
         <div className="bg-gradient-to-r from-red-500 to-red-800 text-white rounded-2xl p-6 text-center shadow-lg mb-8">
-          <h2 className="text-2xl font-bold" style={{ color: '#FFD700' }}>
-            {stats.totalShops} Shops Rated &nbsp;|&nbsp; {stats.totalSlices} Slices Rated
+          <h2 className="text-xl sm:text-2xl font-bold flex flex-col sm:flex-row sm:justify-center sm:gap-3" style={{ color: '#FFD700' }}>
+            <span className="whitespace-nowrap">{stats.totalShops} Shops Rated</span>
+            <span className="hidden sm:inline">|</span>
+            <span className="whitespace-nowrap">{stats.totalSlices} Slices Rated</span>
           </h2>
         </div>
 

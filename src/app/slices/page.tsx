@@ -13,9 +13,11 @@ export default async function SlicesPage({
   const slices = await getAllVisits(sort);
 
   const tabClass = (active: boolean) =>
-    `flex-1 text-center py-2 rounded-full text-sm font-semibold no-underline transition-colors ${
-      active ? "bg-accent text-white" : "text-warm-muted hover:text-accent"
+    `flex-1 text-center py-2 rounded-full text-sm font-semibold no-underline hover:no-underline transition-colors ${
+      active ? "bg-accent" : ""
     }`;
+  // Inline color: the global `a { color }` rule overrides Tailwind text utilities
+  const tabStyle = (active: boolean) => ({ color: active ? "#ffffff" : "#6b7280" });
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-8">
@@ -26,10 +28,10 @@ export default async function SlicesPage({
 
       {/* Sort toggle */}
       <div className="flex gap-1 bg-white border border-warm-border rounded-full p-1 mb-6 shadow-sm">
-        <Link href="/slices?sort=recent" className={tabClass(sort === "recent")}>
+        <Link href="/slices?sort=recent" className={tabClass(sort === "recent")} style={tabStyle(sort === "recent")}>
           Most Recent
         </Link>
-        <Link href="/slices?sort=best" className={tabClass(sort === "best")}>
+        <Link href="/slices?sort=best" className={tabClass(sort === "best")} style={tabStyle(sort === "best")}>
           Best Rated
         </Link>
       </div>
