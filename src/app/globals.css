@@ -8,14 +8,6 @@
   --color-warm-card: #ffffff;
   --color-warm-border: #e5e7eb;
   --color-warm-muted: #6b7280;
-  --font-display: var(--font-lilita), system-ui, sans-serif;
-}
-
-/* Pizzeria-style display font on all headings (font loaded in layout.tsx) */
-h1, h2, h3 {
-  font-family: var(--font-lilita), system-ui, sans-serif;
-  font-weight: 400;
-  letter-spacing: 0.01em;
 }
 
 body {
