@@ -16,6 +16,18 @@ body {
   font-family: system-ui, -apple-system, sans-serif;
 }
 
+/* Faint scattered pizza slices behind all content */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: url("/pizza-pattern.svg");
+  background-size: 320px 320px;
+  opacity: 0.12;
+  pointer-events: none;
+}
+
 a {
   color: var(--color-accent);
   text-decoration: none;
