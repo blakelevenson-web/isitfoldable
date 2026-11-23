@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { scoreTextClass } from "@/lib/score";
 
 type Result = {
   id: string;
@@ -49,7 +50,7 @@ export function SearchBar() {
               <span className="font-medium text-sm text-gray-900">
                 {r.shopName} - {r.sliceType}
               </span>
-              <span className="font-bold text-accent">{Number(r.scoreOverall).toFixed(1)}</span>
+              <span className={`font-bold ${scoreTextClass(r.scoreOverall)}`}>{Number(r.scoreOverall).toFixed(1)}</span>
             </Link>
           ))}
         </div>

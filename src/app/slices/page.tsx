@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { getAllVisits } from "@/lib/queries";
 import { firstPhoto } from "@/lib/photos";
+import { scoreTextClass } from "@/lib/score";
+import { formatDate } from "@/lib/dates";
 
 export const dynamic = "force-dynamic";
 
@@ -59,10 +61,10 @@ export default async function SlicesPage({
                 <div className="flex-1 min-w-0">
                   <p className="font-bold text-gray-900 truncate">{v.shopName}</p>
                   <p className="text-sm text-warm-muted">
-                    {v.sliceType} &middot; {v.date}
+                    {v.sliceType} &middot; <span className="whitespace-nowrap">{formatDate(v.date)}</span>
                   </p>
                 </div>
-                <span className="text-2xl font-black text-accent">
+                <span className={`text-2xl font-black ${scoreTextClass(v.scoreOverall)}`}>
                   {Number(v.scoreOverall).toFixed(1)}
                 </span>
               </Link>

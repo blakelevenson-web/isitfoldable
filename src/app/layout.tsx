@@ -1,6 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Lilita_One } from "next/font/google";
+import { BottomNav } from "@/components/BottomNav";
 import "./globals.css";
+
+// Chunky pizzeria-sign font for headings and the logo (body text stays system font)
+const displayFont = Lilita_One({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-lilita",
+});
 
 export const metadata: Metadata = {
   title: "Foldable — Pizza Ratings",
@@ -13,11 +22,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full antialiased">
+    <html lang="en" className={`h-full antialiased ${displayFont.variable}`}>
       <body className="min-h-full flex flex-col">
         <header className="bg-accent text-white sticky top-0 z-50 shadow-md" style={{ borderRadius: '0 0 10px 10px' }}>
           <nav className="max-w-5xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
-            <Link href="/" className="flex items-center gap-2 text-2xl font-black text-white no-underline hover:no-underline tracking-tight shrink-0">
+            <Link href="/" className="flex items-center gap-2 text-3xl text-white no-underline hover:no-underline shrink-0 font-display">
               🍕 <span style={{ color: '#FFD700' }}>Foldable</span>
             </Link>
             {/* On phones, Slices/Shops/About live in the bottom bar, so only Admin shows up here */}
@@ -29,30 +38,21 @@ export default function RootLayout({
             </div>
           </nav>
         </header>
-        <main className="flex-1 pb-24">{children}</main>
+        <main className="flex-1 pb-8">{children}</main>
 
-        {/* Bottom Navigation Bar */}
-        <nav className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 bg-white/90 backdrop-blur-md border border-warm-border rounded-full shadow-lg px-6 py-3 flex items-center gap-6">
-          <Link href="/" className="flex flex-col items-center gap-1 no-underline text-warm-muted hover:text-accent transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            <span className="text-xs font-medium">Home</span>
-          </Link>
-          <Link href="/slices" className="flex flex-col items-center gap-1 no-underline text-warm-muted hover:text-accent transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2 2 20h20z"/><circle cx="10" cy="14" r="1"/><circle cx="14" cy="16" r="1"/><circle cx="12" cy="10" r="1"/></svg>
-            <span className="text-xs font-medium">Slices</span>
-          </Link>
-          <Link href="/shops" className="flex flex-col items-center gap-1 no-underline text-warm-muted hover:text-accent transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3h18v4H3z"/><path d="M3 7v13a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V7"/><path d="M8 7v4a4 4 0 0 0 8 0V7"/></svg>
-            <span className="text-xs font-medium">Shops</span>
-          </Link>
-          <Link href="/about" className="flex flex-col items-center gap-1 no-underline text-warm-muted hover:text-accent transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-            <span className="text-xs font-medium">About</span>
-          </Link>
-        </nav>
+        <BottomNav />
 
-        <footer className="border-t border-warm-border text-center py-6 text-sm text-warm-muted">
-          Foldable — Pizza Rating App
+        {/* Extra bottom padding so the floating bottom bar never covers the footer */}
+        <footer className="border-t border-warm-border bg-white/70 text-center pt-8 pb-28 px-4">
+          <p className="font-display text-2xl text-accent">🍕 Foldable</p>
+          <p className="text-sm text-warm-muted mt-1">One slice at a time. Honest ratings from every shop I visit.</p>
+          <nav className="flex justify-center gap-5 mt-4 text-sm font-semibold">
+            <Link href="/" className="no-underline">Home</Link>
+            <Link href="/slices" className="no-underline">Slices</Link>
+            <Link href="/shops" className="no-underline">Shops</Link>
+            <Link href="/about" className="no-underline">About</Link>
+          </nav>
+          <p className="text-xs text-warm-muted mt-4">© {new Date().getFullYear()} Foldable</p>
         </footer>
       </body>
     </html>

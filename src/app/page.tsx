@@ -2,6 +2,8 @@ import Link from "next/link";
 import { getRecentVisits, getElite8, getStats } from "@/lib/queries";
 import { SearchBar } from "@/components/SearchBar";
 import { firstPhoto } from "@/lib/photos";
+import { scoreBadgeClass, scoreTextClass } from "@/lib/score";
+import { formatDate } from "@/lib/dates";
 
 export const dynamic = "force-dynamic";
 
@@ -42,17 +44,26 @@ export default async function HomePage() {
                   href={`/visits/${v.id}`}
                   className="block bg-white border border-warm-border rounded-xl overflow-hidden hover:border-accent transition-colors no-underline shadow-sm"
                 >
-                  {photo && (
-                    <img src={photo} alt={v.sliceType} className="w-full max-h-80 object-contain bg-gray-50" />
-                  )}
+                  {/* Fixed-height photo frame so every card lines up. A blurred copy fills
+                      the sides so tall or wide photos are never cropped. */}
+                  <div className="relative h-56 overflow-hidden bg-orange-50">
+                    {photo ? (
+                      <>
+                        <img src={photo} alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover blur-xl scale-110 opacity-60" />
+                        <img src={photo} alt={v.sliceType} className="relative w-full h-full object-contain" />
+                      </>
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-6xl">🍕</div>
+                    )}
+                  </div>
                   <div className="p-4">
                     <p className="font-bold text-gray-900">{v.shopName}</p>
-                    <p className="text-sm text-warm-muted">{v.sliceType} &middot; {v.date}</p>
+                    <p className="text-sm text-warm-muted">{v.sliceType} &middot; {formatDate(v.date)}</p>
                     {v.comments && (
                       <p className="text-sm text-warm-muted italic mt-2">&ldquo;{v.comments}&rdquo;</p>
                     )}
                     <div className="text-right mt-2">
-                      <span className="inline-block bg-accent-light text-accent font-bold px-3 py-1 rounded text-sm">
+                      <span className={`inline-block font-bold px-3 py-1 rounded text-sm ${scoreBadgeClass(v.scoreOverall)}`}>
                         {Number(v.scoreOverall).toFixed(1)}
                       </span>
                     </div>
@@ -88,7 +99,7 @@ export default async function HomePage() {
                   <div className="flex-1">
                     <p className="font-bold text-gray-900">{v.shopName} ({v.sliceType})</p>
                   </div>
-                  <span className="text-2xl font-black text-accent">{Number(v.scoreOverall).toFixed(1)}</span>
+                  <span className={`text-2xl font-black ${scoreTextClass(v.scoreOverall)}`}>{Number(v.scoreOverall).toFixed(1)}</span>
                 </Link>
                 );
               })}

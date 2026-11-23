@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getShopById, getVisitsForShop, getSliceTypesForShop } from "@/lib/queries";
+import { scoreBadgeClass, scoreTextClass } from "@/lib/score";
+import { formatDate } from "@/lib/dates";
 
 export const dynamic = "force-dynamic";
 
@@ -51,7 +53,7 @@ export default async function ShopDetailPage({ params }: { params: Promise<{ id:
             {sliceTypes.map((st) => (
               <div key={st.sliceType} className="flex items-center justify-between bg-white border border-warm-border rounded-lg p-3">
                 <span className="text-sm font-medium">{st.sliceType}</span>
-                <span className="bg-accent-light text-accent font-bold px-3 py-1 rounded text-sm">{st.avgScore}</span>
+                <span className={`font-bold px-3 py-1 rounded text-sm ${scoreBadgeClass(st.avgScore)}`}>{st.avgScore}</span>
               </div>
             ))}
           </div>
@@ -68,13 +70,13 @@ export default async function ShopDetailPage({ params }: { params: Promise<{ id:
             {visits.map((v) => (
               <div key={v.id} className="flex items-center justify-between bg-white border border-warm-border rounded-lg p-4">
                 <div className="flex-1">
-                  <p className="font-medium text-sm">{v.sliceType} — {v.date}</p>
+                  <p className="font-medium text-sm">{v.sliceType} — {formatDate(v.date)}</p>
                   {v.comments && (
                     <p className="text-xs text-warm-muted italic">&ldquo;{v.comments}&rdquo;</p>
                   )}
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="text-xl font-black text-accent">{Number(v.scoreOverall).toFixed(1)}</span>
+                  <span className={`text-xl font-black ${scoreTextClass(v.scoreOverall)}`}>{Number(v.scoreOverall).toFixed(1)}</span>
                   <Link
                     href={`/visits/${v.id}`}
                     className="text-sm px-3 py-1 bg-accent text-white rounded-lg font-medium no-underline hover:bg-accent-dark"

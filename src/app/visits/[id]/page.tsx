@@ -2,6 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getVisitById } from "@/lib/queries";
 import { parsePhotos } from "@/lib/photos";
+import { scoreTextClass } from "@/lib/score";
+import { formatDate } from "@/lib/dates";
 
 export const dynamic = "force-dynamic";
 
@@ -39,7 +41,7 @@ export default async function VisitDetailPage({ params }: { params: Promise<{ id
       })()}
 
       <h1 className="text-3xl font-bold mb-1">{visit.sliceType} Style</h1>
-      <p className="text-sm text-warm-muted mb-6">Rated on {visit.date}</p>
+      <p className="text-sm text-warm-muted mb-6">Rated on {formatDate(visit.date)}</p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
         {/* Score Breakdown */}
@@ -69,7 +71,7 @@ export default async function VisitDetailPage({ params }: { params: Promise<{ id
         <div>
           <div className="bg-accent-light border border-accent/20 rounded-xl p-6 text-center mb-6">
             <p className="text-sm text-warm-muted mb-1">Overall Score</p>
-            <p className="text-5xl font-black text-accent">{Number(visit.scoreOverall).toFixed(1)}</p>
+            <p className={`text-5xl font-black ${scoreTextClass(visit.scoreOverall)}`}>{Number(visit.scoreOverall).toFixed(1)}</p>
           </div>
 
           <h2 className="text-lg font-bold mb-2">Reviewer&apos;s Notes</h2>
